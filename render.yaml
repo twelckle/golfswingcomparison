@@ -2,10 +2,21 @@ services:
   - type: web
     name: swing-backend
     runtime: python
-    buildCommand: ""
-    startCommand: python app.py
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn app:app"
     envVars:
       - key: FLASK_ENV
         value: production
     plan: free
     autoDeploy: true
+    build:
+      pythonVersion: 3.10.12
+
+  - type: web
+    name: swing-frontend
+    env: static
+    buildCommand: "cd frontend && npm install && npm run build"
+    staticPublishPath: "frontend/dist"
+    buildFilter:
+      paths:
+        - frontend/**/*
