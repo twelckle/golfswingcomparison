@@ -9,8 +9,7 @@ services:
         value: production
     plan: free
     autoDeploy: true
-    build:
-      pythonVersion: 3.10.12
+    pythonVersion: 3.10.12
 
   - type: web
     name: swing-frontend
